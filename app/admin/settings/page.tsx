@@ -14,6 +14,7 @@ import {
   MapPin,
   Clock
 } from 'lucide-react';
+import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminSettingsPage() {
   const [content, setContent] = useState<any>(null);
@@ -21,8 +22,7 @@ export default function AdminSettingsPage() {
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error loading settings:', err));
   }, []);
@@ -32,21 +32,20 @@ export default function AdminSettingsPage() {
     setSaving(true);
     setStatusMessage(null);
 
-    try {
-      const res = await fetch('/api/content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(content)
-      });
+    // Save admin PIN to localStorage as well
+    if (content?.siteSettings?.adminPin && typeof window !== 'undefined') {
+      localStorage.setItem('sampath_admin_pin', content.siteSettings.adminPin);
+    }
 
-      const data = await res.json();
-      if (res.ok && data.success) {
+    try {
+      const res = await saveClientContent(content);
+      if (res.success) {
         setStatusMessage({ type: 'success', text: 'Site settings & security updated successfully!' });
       } else {
-        setStatusMessage({ type: 'error', text: data.error || 'Failed to save settings' });
+        setStatusMessage({ type: 'error', text: res.message || 'Failed to save settings' });
       }
     } catch (err) {
-      setStatusMessage({ type: 'error', text: 'Server connection error' });
+      setStatusMessage({ type: 'error', text: 'Error saving settings.' });
     } finally {
       setSaving(false);
     }

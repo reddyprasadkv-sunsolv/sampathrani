@@ -15,6 +15,7 @@ import {
   Clock
 } from 'lucide-react';
 import ImageUploader from '@/components/ImageUploader';
+import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminBlogsPage() {
   const [content, setContent] = useState<any>(null);
@@ -24,8 +25,7 @@ export default function AdminBlogsPage() {
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error loading content:', err));
   }, []);
@@ -38,22 +38,16 @@ export default function AdminBlogsPage() {
     setContent(updated);
 
     try {
-      const res = await fetch('/api/content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updated)
-      });
-
-      const data = await res.json();
-      if (res.ok && data.success) {
+      const res = await saveClientContent(updated);
+      if (res.success) {
         setStatusMessage({ type: 'success', text: 'Articles published successfully!' });
         setEditingBlog(null);
         setIsNew(false);
       } else {
-        setStatusMessage({ type: 'error', text: data.error || 'Failed to save articles' });
+        setStatusMessage({ type: 'error', text: res.message || 'Failed to save articles' });
       }
     } catch (err) {
-      setStatusMessage({ type: 'error', text: 'Server connection error' });
+      setStatusMessage({ type: 'error', text: 'Error saving articles.' });
     } finally {
       setSaving(false);
     }

@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   FileCode
 } from 'lucide-react';
+import { fetchClientContent, saveClientContent, fetchClientInquiries } from '@/lib/clientData';
 
 export default function AdminBackupPage() {
   const [loading, setLoading] = useState(false);
@@ -20,10 +21,18 @@ export default function AdminBackupPage() {
     setLoading(true);
     setStatusMessage(null);
     try {
-      const res = await fetch('/api/backup');
-      const data = await res.json();
+      const [contentData, inquiriesData] = await Promise.all([
+        fetchClientContent(),
+        fetchClientInquiries()
+      ]);
 
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const backupSnapshot = {
+        exportedAt: new Date().toISOString(),
+        siteContent: contentData,
+        inquiries: inquiriesData
+      };
+
+      const blob = new Blob([JSON.stringify(backupSnapshot, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -52,18 +61,17 @@ export default function AdminBackupPage() {
       reader.onload = async (event) => {
         try {
           const parsed = JSON.parse(event.target?.result as string);
+          const siteContent = parsed.siteContent || parsed;
 
-          const res = await fetch('/api/backup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(parsed)
-          });
+          const res = await saveClientContent(siteContent);
+          if (parsed.inquiries && typeof window !== 'undefined') {
+            localStorage.setItem('sampath_inquiries', JSON.stringify(parsed.inquiries));
+          }
 
-          const data = await res.json();
-          if (res.ok && data.success) {
-            setStatusMessage({ type: 'success', text: 'Backup restored successfully! All data refreshed.' });
+          if (res.success) {
+            setStatusMessage({ type: 'success', text: 'Backup restored successfully! All content refreshed.' });
           } else {
-            setStatusMessage({ type: 'error', text: data.error || 'Failed to restore backup' });
+            setStatusMessage({ type: 'error', text: res.message || 'Failed to restore backup.' });
           }
         } catch (parseErr) {
           setStatusMessage({ type: 'error', text: 'Invalid JSON backup file format.' });
@@ -107,51 +115,52 @@ export default function AdminBackupPage() {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Export Backup */}
-        <div className="bg-white rounded-3xl p-8 border border-[#D5BDAF]/60 shadow-sm flex flex-col justify-between space-y-6">
+        {/* Card 1: Export Snapshot */}
+        <div className="bg-white rounded-3xl p-8 border border-[#D5BDAF]/60 shadow-sm space-y-5 flex flex-col justify-between">
           <div className="space-y-3">
             <div className="w-12 h-12 rounded-2xl bg-[#F5EBE0] text-[#382F28] border border-[#D5BDAF] flex items-center justify-center">
               <Download className="w-6 h-6" />
             </div>
             <h3 className="font-serif-luxury text-xl font-bold text-[#261E18]">
-              Export Master Backup
+              Download Master Snapshot
             </h3>
-            <p className="text-xs text-[#6A5A4E] leading-relaxed">
-              Download a complete JSON copy of all website content, programs, upcoming masterclasses, blog articles, and inquiries.
+            <p className="text-xs text-[#7E6F64] leading-relaxed">
+              Export all website content, hero sections, 7 signature programs, events, reviews, blogs, and inquiries as a timestamped JSON file.
             </p>
           </div>
 
           <button
             onClick={handleExport}
             disabled={loading}
-            className="w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#382F28] hover:bg-[#261E18] text-[#FAF8F5] shadow-md transition-all flex items-center justify-center space-x-2"
+            className="w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#382F28] hover:bg-[#261E18] text-[#FAF8F5] shadow-md shadow-[#382F28]/20 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
           >
             <Download className="w-4 h-4 text-[#D5BDAF]" />
-            <span>{loading ? 'Exporting...' : 'Download Backup File (.json)'}</span>
+            <span>{loading ? 'Generating Snapshot...' : 'Export JSON Master Backup'}</span>
           </button>
         </div>
 
-        {/* Restore Backup */}
-        <div className="bg-white rounded-3xl p-8 border border-[#D5BDAF]/60 shadow-sm flex flex-col justify-between space-y-6">
+        {/* Card 2: Restore Snapshot */}
+        <div className="bg-white rounded-3xl p-8 border border-[#D5BDAF]/60 shadow-sm space-y-5 flex flex-col justify-between">
           <div className="space-y-3">
             <div className="w-12 h-12 rounded-2xl bg-[#F5EBE0] text-[#382F28] border border-[#D5BDAF] flex items-center justify-center">
               <Upload className="w-6 h-6" />
             </div>
             <h3 className="font-serif-luxury text-xl font-bold text-[#261E18]">
-              Restore from Backup
+              Restore Database from Backup
             </h3>
-            <p className="text-xs text-[#6A5A4E] leading-relaxed">
-              Upload a previously exported JSON backup file to restore pages, programs, events, and blogs.
+            <p className="text-xs text-[#7E6F64] leading-relaxed">
+              Upload a previously exported JSON backup file to overwrite and restore all website contents, programs, and reviews instantly.
             </p>
           </div>
 
-          <label className="w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#FAF8F5] text-[#261E18] hover:bg-[#F5EBE0] border border-[#D5BDAF] transition-all flex items-center justify-center space-x-2 cursor-pointer">
+          <label className="w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-wider border-2 border-dashed border-[#D5BDAF] hover:border-[#382F28] bg-[#FAF8F5] hover:bg-[#F5EBE0] text-[#261E18] transition-all flex items-center justify-center space-x-2 cursor-pointer text-center">
             <Upload className="w-4 h-4 text-[#8C7769]" />
-            <span>{loading ? 'Restoring...' : 'Select Backup JSON File'}</span>
+            <span>{loading ? 'Restoring Data...' : 'Choose JSON Backup File to Restore'}</span>
             <input
               type="file"
-              accept=".json,application/json"
+              accept=".json"
               onChange={handleImport}
+              disabled={loading}
               className="hidden"
             />
           </label>

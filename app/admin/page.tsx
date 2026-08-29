@@ -16,6 +16,7 @@ import {
   ExternalLink,
   ShieldCheck
 } from 'lucide-react';
+import { fetchClientContent, fetchClientInquiries } from '@/lib/clientData';
 
 export default function AdminDashboard() {
   const [content, setContent] = useState<any>(null);
@@ -23,10 +24,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/content').then((res) => res.json()),
-      fetch('/api/inquiries').then((res) => res.json())
-    ])
+    Promise.all([fetchClientContent(), fetchClientInquiries()])
       .then(([contentData, inquiriesData]) => {
         setContent(contentData);
         setInquiries(Array.isArray(inquiriesData) ? inquiriesData : []);

@@ -15,6 +15,7 @@ import {
   MessageCircle,
   Video
 } from 'lucide-react';
+import { fetchClientInquiries } from '@/lib/clientData';
 
 export default function AdminInquiriesPage() {
   const [inquiries, setInquiries] = useState<any[]>([]);
@@ -23,8 +24,7 @@ export default function AdminInquiriesPage() {
   const [selectedInquiry, setSelectedInquiry] = useState<any | null>(null);
 
   const fetchInquiries = () => {
-    fetch('/api/inquiries')
-      .then((res) => res.json())
+    fetchClientInquiries()
       .then((data) => {
         setInquiries(Array.isArray(data) ? data : []);
         setLoading(false);
@@ -41,38 +41,38 @@ export default function AdminInquiriesPage() {
 
   const handleUpdateStatus = async (id: string, newStatus: string) => {
     try {
-      const res = await fetch('/api/inquiries', {
+      await fetch('/api/inquiries', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, status: newStatus })
       });
+    } catch (err) {}
 
-      if (res.ok) {
-        setInquiries(inquiries.map((inq) => (inq.id === id ? { ...inq, status: newStatus } : inq)));
-        if (selectedInquiry?.id === id) {
-          setSelectedInquiry({ ...selectedInquiry, status: newStatus });
-        }
-      }
-    } catch (err) {
-      console.error('Error updating inquiry status:', err);
+    const updated = inquiries.map((inq) => (inq.id === id ? { ...inq, status: newStatus } : inq));
+    setInquiries(updated);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('sampath_inquiries', JSON.stringify(updated));
+    }
+    if (selectedInquiry?.id === id) {
+      setSelectedInquiry({ ...selectedInquiry, status: newStatus });
     }
   };
 
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to permanently delete this lead?')) {
       try {
-        const res = await fetch(`/api/inquiries?id=${id}`, {
+        await fetch(`/api/inquiries?id=${id}`, {
           method: 'DELETE'
         });
+      } catch (err) {}
 
-        if (res.ok) {
-          setInquiries(inquiries.filter((inq) => inq.id !== id));
-          if (selectedInquiry?.id === id) {
-            setSelectedInquiry(null);
-          }
-        }
-      } catch (err) {
-        console.error('Error deleting inquiry:', err);
+      const updated = inquiries.filter((inq) => inq.id !== id);
+      setInquiries(updated);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('sampath_inquiries', JSON.stringify(updated));
+      }
+      if (selectedInquiry?.id === id) {
+        setSelectedInquiry(null);
       }
     }
   };

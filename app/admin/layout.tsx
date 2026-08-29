@@ -21,6 +21,7 @@ import {
   ShieldCheck,
   ChevronRight
 } from 'lucide-react';
+import { getImageUrl } from '@/lib/imageUtils';
 
 export default function AdminLayout({
   children,
@@ -33,12 +34,15 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // If on login page, don't show the admin dashboard shell
-  const isLoginPage = pathname === '/admin/login';
+  const isLoginPage = pathname?.includes('/admin/login') || pathname?.endsWith('admin/login') || pathname?.endsWith('admin/login/');
 
   useEffect(() => {
-    if (isLoginPage) return;
+    if (isLoginPage) {
+      setAuthorized(true);
+      return;
+    }
 
-    const token = localStorage.getItem('sampath_admin_auth');
+    const token = typeof window !== 'undefined' ? localStorage.getItem('sampath_admin_auth') : null;
     if (!token) {
       router.push('/admin/login');
     } else {
@@ -58,7 +62,7 @@ export default function AdminLayout({
   if (!authorized) {
     return (
       <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center text-[#6A5A4E] text-sm">
-        Verifying administrator credentials...
+        Verifying administrator session...
       </div>
     );
   }
@@ -76,7 +80,7 @@ export default function AdminLayout({
   ];
 
   const isActive = (href: string) => {
-    if (href === '/admin') return pathname === '/admin';
+    if (href === '/admin') return pathname === '/admin' || pathname === '/admin/';
     return pathname.startsWith(href);
   };
 
@@ -86,7 +90,7 @@ export default function AdminLayout({
       <div className="md:hidden flex items-center justify-between p-4 bg-[#261E18] text-[#FAF8F5]">
         <div className="flex items-center space-x-2.5">
           <div className="w-8 h-8 rounded-full overflow-hidden border border-[#D5BDAF] p-0.5">
-            <Image src="/images/logo.png" alt="Logo" width={32} height={32} />
+            <Image src={getImageUrl('/images/logo.png')} alt="Logo" width={32} height={32} />
           </div>
           <span className="font-serif-luxury font-bold text-[#FAF8F5] text-sm">
             Dr. Sampath Rani CMS
@@ -111,7 +115,7 @@ export default function AdminLayout({
           <div className="flex items-center space-x-3 mb-8 pb-6 border-b border-white/10">
             <div className="w-10 h-10 rounded-full overflow-hidden border border-[#D5BDAF] p-1 bg-white/10">
               <Image
-                src="/images/logo.png"
+                src={getImageUrl('/images/logo.png')}
                 alt="Dr. Sampath Rani"
                 width={40}
                 height={40}
@@ -193,7 +197,7 @@ export default function AdminLayout({
               className="text-xs text-[#382F28] hover:text-[#8C7769] font-bold flex items-center space-x-1"
             >
               <span>Preview Live Site</span>
-              <ExternalLink className="w-3 h-3 text-[#8C7769]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#8C7769]" />
             </Link>
           </div>
         </header>

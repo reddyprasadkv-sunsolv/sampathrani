@@ -13,6 +13,7 @@ import {
   Clock,
   MapPin
 } from 'lucide-react';
+import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminEventsPage() {
   const [content, setContent] = useState<any>(null);
@@ -22,8 +23,7 @@ export default function AdminEventsPage() {
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error loading content:', err));
   }, []);
@@ -36,22 +36,16 @@ export default function AdminEventsPage() {
     setContent(updated);
 
     try {
-      const res = await fetch('/api/content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updated)
-      });
-
-      const data = await res.json();
-      if (res.ok && data.success) {
+      const res = await saveClientContent(updated);
+      if (res.success) {
         setStatusMessage({ type: 'success', text: 'Events schedule updated successfully!' });
         setEditingEvent(null);
         setIsNew(false);
       } else {
-        setStatusMessage({ type: 'error', text: data.error || 'Failed to save events' });
+        setStatusMessage({ type: 'error', text: res.message || 'Failed to save events' });
       }
     } catch (err) {
-      setStatusMessage({ type: 'error', text: 'Server connection error' });
+      setStatusMessage({ type: 'error', text: 'Error saving events.' });
     } finally {
       setSaving(false);
     }

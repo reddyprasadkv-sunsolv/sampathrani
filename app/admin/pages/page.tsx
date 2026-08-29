@@ -14,6 +14,7 @@ import {
   Briefcase
 } from 'lucide-react';
 import ImageUploader from '@/components/ImageUploader';
+import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminPagesEditor() {
   const [content, setContent] = useState<any>(null);
@@ -22,8 +23,7 @@ export default function AdminPagesEditor() {
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error fetching content:', err));
   }, []);
@@ -33,20 +33,14 @@ export default function AdminPagesEditor() {
     setStatusMessage(null);
 
     try {
-      const res = await fetch('/api/content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(content)
-      });
-
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setStatusMessage({ type: 'success', text: 'Page content successfully saved & live!' });
+      const res = await saveClientContent(content);
+      if (res.success) {
+        setStatusMessage({ type: 'success', text: res.message || 'Page content successfully saved & live!' });
       } else {
-        setStatusMessage({ type: 'error', text: data.error || 'Failed to save changes.' });
+        setStatusMessage({ type: 'error', text: res.message || 'Failed to save changes.' });
       }
     } catch (err) {
-      setStatusMessage({ type: 'error', text: 'Error saving content to server.' });
+      setStatusMessage({ type: 'error', text: 'Error saving content.' });
     } finally {
       setSaving(false);
     }
