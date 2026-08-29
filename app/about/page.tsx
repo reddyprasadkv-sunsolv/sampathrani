@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getImageUrl } from '@/lib/imageUtils';
 import {
   Sparkles,
   Award,
@@ -105,10 +106,11 @@ export default function AboutPage() {
                   <div className="relative bg-white rounded-3xl overflow-hidden p-3 border border-[#D5BDAF] shadow-lg">
                     <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#EDEDE9]">
                       <Image
-                        src={bio?.image || '/images/sampath_rani.png'}
-                        alt="Dr. Sampath Rani Momula"
+                        src={getImageUrl(bio?.image || '/images/sampath_rani.png')}
+                        alt="Dr. Sampath Rani"
                         fill
                         className="object-cover"
+                        priority
                       />
                     </div>
                   </div>
@@ -216,8 +218,8 @@ export default function AboutPage() {
                   <div className="bg-white rounded-3xl overflow-hidden p-3 border border-[#D5BDAF] shadow-lg">
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#EDEDE9]">
                       <Image
-                        src={spiritual?.image || '/images/spiritual.jpg'}
-                        alt="Spiritual Journey"
+                        src={getImageUrl(spiritual?.image || '/images/spiritual.jpg')}
+                        alt="Dr. Sampath Rani Spiritual Awakening"
                         fill
                         className="object-cover"
                       />
@@ -275,8 +277,8 @@ export default function AboutPage() {
                   <div className="bg-white rounded-3xl overflow-hidden p-3 border border-[#D5BDAF] shadow-lg">
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#EDEDE9]">
                       <Image
-                        src={worklife?.image || '/images/school-work.jpg'}
-                        alt="Past Work Life Collage"
+                        src={getImageUrl(worklife?.image || '/images/school-work.jpg')}
+                        alt="Dr. Sampath Rani Career Heritage"
                         fill
                         className="object-cover"
                       />

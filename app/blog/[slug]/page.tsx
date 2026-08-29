@@ -13,6 +13,7 @@ import {
   Play
 } from 'lucide-react';
 import { getSiteContent } from '@/lib/contentStore';
+import { getImageUrl } from '@/lib/imageUtils';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -112,7 +113,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           blog.image && (
             <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-[#D5BDAF] mb-10 shadow-xl bg-[#EDEDE9]">
               <Image
-                src={blog.image}
+                src={getImageUrl(blog.image)}
                 alt={blog.title}
                 fill
                 className="object-cover"
@@ -135,7 +136,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5BDAF]/60 shadow-md mt-12 flex flex-col sm:flex-row items-center gap-6">
           <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#D5BDAF] shrink-0 relative bg-[#EDEDE9]">
             <Image
-              src="/images/welcome.jpg"
+              src={getImageUrl('/images/welcome.jpg')}
               alt="Dr. Sampath Rani"
               fill
               className="object-cover"

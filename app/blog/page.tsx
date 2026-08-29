@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getImageUrl } from '@/lib/imageUtils';
 import {
   Sparkles,
   Calendar,
@@ -129,7 +130,7 @@ export default function BlogPage() {
                     ) : (
                       <Link href={`/blog/${blog.slug}`} className="block relative w-full h-full">
                         <Image
-                          src={blog.image || '/images/abt3.jpg'}
+                          src={getImageUrl(blog.image || '/images/abt3.jpg')}
                           alt={blog.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-500"

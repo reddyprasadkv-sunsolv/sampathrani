@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { getImageUrl } from '@/lib/imageUtils';
 import {
   Sparkles,
   CheckCircle2,
@@ -62,7 +63,7 @@ export default function ProgramsPage() {
                       <div className="relative bg-white rounded-3xl overflow-hidden p-2.5 border border-[#D5BDAF]">
                         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#EDEDE9]">
                           <Image
-                            src={prog.image || '/images/welcome.jpg'}
+                            src={getImageUrl(prog.image || '/images/welcome.jpg')}
                             alt={prog.title}
                             fill
                             className="object-cover hover:scale-105 transition-transform duration-500"

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getImageUrl } from '@/lib/imageUtils';
 import {
   Sparkles,
   ArrowRight,
@@ -141,7 +142,7 @@ export default function HomePage() {
                 <div className="relative bg-white/90 rounded-3xl overflow-hidden border border-[#D5BDAF] p-2.5 shadow-xl">
                   <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#EDEDE9]">
                     <Image
-                      src={hero.heroImage || '/images/welcome.jpg'}
+                      src={getImageUrl(hero.heroImage || '/images/welcome.jpg')}
                       alt="Dr. Sampath Rani Momula"
                       fill
                       className="object-cover object-top hover:scale-105 transition-transform duration-700"
@@ -188,7 +189,7 @@ export default function HomePage() {
                 <div className="relative bg-white rounded-3xl overflow-hidden border border-[#D5BDAF] p-2.5 shadow-lg">
                   <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#EDEDE9]">
                     <Image
-                      src={about?.image || '/images/abt2.jpg'}
+                      src={getImageUrl(about?.image || '/images/abt2.jpg')}
                       alt="Dr. Sampath Rani"
                       fill
                       className="object-cover"
@@ -270,7 +271,7 @@ export default function HomePage() {
                   {/* Program Image Preview */}
                   <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-[#EDEDE9] border border-[#D5BDAF]/30">
                     <Image
-                      src={prog.image || '/images/welcome.jpg'}
+                      src={getImageUrl(prog.image || '/images/welcome.jpg')}
                       alt={prog.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -406,11 +407,11 @@ export default function HomePage() {
                 <div className="absolute -inset-2 rounded-3xl bg-[#D5BDAF]/20 blur-xl group-hover:bg-[#D5BDAF]/30 transition-all duration-500" />
                 <div className="relative bg-white rounded-3xl p-4 border border-[#D5BDAF] shadow-xl">
                   <Image
-                    src={book?.image || '/images/book.png'}
-                    alt="The Doorway to Your Dreams by Dr. Sampath Rani"
-                    width={400}
-                    height={550}
-                    className="w-full h-auto rounded-xl shadow-md group-hover:scale-105 transition-transform duration-500"
+                    src={getImageUrl(book?.image || '/images/book.png')}
+                    alt={book?.title || 'The Doorway to Your Dreams'}
+                    width={380}
+                    height={520}
+                    className="w-full max-w-[280px] sm:max-w-[340px] drop-shadow-2xl hover:scale-105 transition-transform duration-500"
                   />
                   <div className="text-center pt-4">
                     <div className="flex items-center justify-center space-x-1 text-[#8C7769] text-xs">

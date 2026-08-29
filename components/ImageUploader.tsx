@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Upload, Image as ImageIcon, X, Check, Loader2, Link as LinkIcon, Info, Maximize2 } from 'lucide-react';
+import { getImageUrl } from '@/lib/imageUtils';
 
 interface ImageUploaderProps {
   value: string;
@@ -113,12 +114,12 @@ export default function ImageUploader({
           <div className="sm:col-span-5 relative group rounded-2xl overflow-hidden border border-[#D5BDAF] bg-[#FAF8F5] shadow-xs">
             <div className={`relative w-full ${aspectClass} max-h-40 bg-[#EDEDE9]`}>
               <img
-                src={value}
+                src={getImageUrl(value)}
                 alt="Uploaded preview"
                 onLoad={handleImageLoad}
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/images/welcome.jpg';
+                  (e.target as HTMLImageElement).src = getImageUrl('/images/welcome.jpg');
                 }}
               />
             </div>

@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { getImageUrl } from '@/lib/imageUtils';
 import {
   Phone,
   Mail,
@@ -78,7 +79,7 @@ export default function Footer() {
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 rounded-full overflow-hidden border border-[#D5BDAF] p-1 bg-[#FAF8F5] shadow-sm">
                 <Image
-                  src="/images/logo.png"
+                  src={getImageUrl('/images/logo.png')}
                   alt="Dr. Sampath Rani"
                   width={48}
                   height={48}

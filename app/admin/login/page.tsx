@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Lock, ShieldCheck, ArrowRight, Sparkles, KeyRound } from 'lucide-react';
 import CaptchaWidget from '@/components/CaptchaWidget';
+import { getImageUrl } from '@/lib/imageUtils';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -57,7 +58,7 @@ export default function AdminLoginPage() {
         <div className="text-center space-y-3 mb-8">
           <div className="w-16 h-16 rounded-full overflow-hidden border border-[#D5BDAF] p-1 bg-[#F5EBE0] mx-auto shadow-sm">
             <Image
-              src="/images/logo.png"
+              src={getImageUrl('/images/logo.png')}
               alt="Dr. Sampath Rani"
               width={64}
               height={64}

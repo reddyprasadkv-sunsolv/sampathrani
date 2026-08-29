@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { getImageUrl } from '@/lib/imageUtils';
 import {
   Phone,
   Mail,
@@ -158,7 +159,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center space-x-3.5 group shrink-0">
             <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-[#D5BDAF] p-0.5 bg-[#FAF8F5] group-hover:border-[#261E18] transition-all shadow-xs">
               <Image
-                src="/images/logo.png"
+                src={getImageUrl('/images/logo.png')}
                 alt="Dr. Sampath Rani Momula"
                 width={48}
                 height={48}
@@ -412,7 +413,7 @@ export default function Navbar() {
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#D5BDAF] p-0.5 bg-white">
                 <Image
-                  src="/images/logo.png"
+                  src={getImageUrl('/images/logo.png')}
                   alt="Dr. Sampath Rani"
                   width={40}
                   height={40}
