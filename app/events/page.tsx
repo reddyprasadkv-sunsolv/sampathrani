@@ -13,14 +13,15 @@ import {
   Filter
 } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
+import defaultContent from '@/data/site-content.json';
+import { fetchClientContent } from '@/lib/clientData';
 
 export default function EventsPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [filter, setFilter] = useState<'All' | 'Hybrid' | 'Online' | 'In-Person'>('All');
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error loading content:', err));
   }, []);

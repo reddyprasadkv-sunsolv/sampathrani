@@ -14,10 +14,11 @@ import {
   BookOpen,
   Play
 } from 'lucide-react';
+import defaultContent from '@/data/site-content.json';
 import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminTestimonialsPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [activeTab, setActiveTab] = useState<'videos' | 'written'>('videos');
   const [editingVideo, setEditingVideo] = useState<any | null>(null);
   const [editingWritten, setEditingWritten] = useState<any | null>(null);

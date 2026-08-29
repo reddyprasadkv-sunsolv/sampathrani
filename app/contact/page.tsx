@@ -17,9 +17,11 @@ import {
 } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
 import CaptchaWidget from '@/components/CaptchaWidget';
+import defaultContent from '@/data/site-content.json';
+import { fetchClientContent } from '@/lib/clientData';
 
 export default function ContactPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -36,8 +38,7 @@ export default function ContactPage() {
   });
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error loading content:', err));
   }, []);

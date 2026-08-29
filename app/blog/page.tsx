@@ -16,15 +16,16 @@ import {
 } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
 import VideoModal from '@/components/VideoModal';
+import defaultContent from '@/data/site-content.json';
+import { fetchClientContent } from '@/lib/clientData';
 
 export default function BlogPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error loading content:', err));
   }, []);

@@ -16,13 +16,14 @@ import {
   Compass
 } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
+import defaultContent from '@/data/site-content.json';
+import { fetchClientContent } from '@/lib/clientData';
 
 export default function ProgramsPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
 
   useEffect(() => {
-    fetch('/api/content')
-      .then((res) => res.json())
+    fetchClientContent()
       .then((data) => setContent(data))
       .catch((err) => console.error('Error loading content:', err));
   }, []);
