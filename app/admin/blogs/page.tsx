@@ -15,10 +15,12 @@ import {
   Clock
 } from 'lucide-react';
 import ImageUploader from '@/components/ImageUploader';
+import defaultContent from '@/data/site-content.json';
 import { fetchClientContent, saveClientContent } from '@/lib/clientData';
+import { getImageUrl } from '@/lib/imageUtils';
 
 export default function AdminBlogsPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [editingBlog, setEditingBlog] = useState<any | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -139,7 +141,7 @@ export default function AdminBlogsPage() {
             <div>
               <div className="relative aspect-[16/9] bg-[#EDEDE9]">
                 <img
-                  src={b.youtubeId ? `https://img.youtube.com/vi/${b.youtubeId}/hqdefault.jpg` : b.image || '/images/abt3.jpg'}
+                  src={b.youtubeId ? `https://img.youtube.com/vi/${b.youtubeId}/hqdefault.jpg` : getImageUrl(b.image || '/images/abt3.jpg')}
                   alt={b.title}
                   className="w-full h-full object-cover"
                 />

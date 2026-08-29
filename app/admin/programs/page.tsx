@@ -12,10 +12,11 @@ import {
   X
 } from 'lucide-react';
 import ImageUploader from '@/components/ImageUploader';
+import defaultContent from '@/data/site-content.json';
 import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminProgramsPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [editingProgram, setEditingProgram] = useState<any | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);

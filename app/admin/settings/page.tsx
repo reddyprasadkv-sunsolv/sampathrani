@@ -14,10 +14,11 @@ import {
   MapPin,
   Clock
 } from 'lucide-react';
+import defaultContent from '@/data/site-content.json';
 import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminSettingsPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [saving, setSaving] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 

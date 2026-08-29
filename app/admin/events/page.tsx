@@ -13,10 +13,11 @@ import {
   Clock,
   MapPin
 } from 'lucide-react';
+import defaultContent from '@/data/site-content.json';
 import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminEventsPage() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [editingEvent, setEditingEvent] = useState<any | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);

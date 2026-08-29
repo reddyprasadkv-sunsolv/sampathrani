@@ -14,10 +14,11 @@ import {
   Briefcase
 } from 'lucide-react';
 import ImageUploader from '@/components/ImageUploader';
+import defaultContent from '@/data/site-content.json';
 import { fetchClientContent, saveClientContent } from '@/lib/clientData';
 
 export default function AdminPagesEditor() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
   const [activeSection, setActiveSection] = useState<'hero' | 'about' | 'biography' | 'spiritual' | 'worklife' | 'book'>('hero');
   const [saving, setSaving] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
