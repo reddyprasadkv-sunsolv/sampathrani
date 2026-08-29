@@ -20,6 +20,13 @@ interface BlogPostPageProps {
   }>;
 }
 
+export async function generateStaticParams() {
+  const content = getSiteContent();
+  return (content?.blogs || []).map((blog: any) => ({
+    slug: blog.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const content = getSiteContent();
