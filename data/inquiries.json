@@ -1,0 +1,38 @@
+[
+  {
+    "id": "inq-1787983584472",
+    "name": "Ananya Sharma",
+    "email": "ananya@example.com",
+    "phone": "+91 98765 43210",
+    "service": "Holistic Life Coaching (1-on-1)",
+    "preferredMode": "Zoom Video Consultation",
+    "preferredDate": "2026-09-10",
+    "message": "Looking forward to spiritual life coaching and Law of Attraction mentorship.",
+    "status": "New",
+    "createdAt": "2026-08-29T06:06:24.472Z"
+  },
+  {
+    "id": "inq-1725000000001",
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "+91 98765 43210",
+    "service": "Holistic Life Coaching (1-on-1)",
+    "preferredMode": "Zoom Online",
+    "preferredDate": "2026-09-02",
+    "message": "Interested in 4-session breakthrough coaching for career transition and stress management.",
+    "status": "New",
+    "createdAt": "2026-08-28T14:30:00.000Z"
+  },
+  {
+    "id": "inq-1725000000002",
+    "name": "Rajesh Varma",
+    "email": "rajesh.v@techcorp.in",
+    "phone": "+91 91234 56789",
+    "service": "Chakra Healing & Balancing Meditation",
+    "preferredMode": "In-Person (Hyderabad)",
+    "preferredDate": "2026-09-06",
+    "message": "Looking to attend the next weekend retreat session for severe work-related stress.",
+    "status": "Contacted",
+    "createdAt": "2026-08-27T09:15:00.000Z"
+  }
+]
