@@ -27,6 +27,11 @@
     "primaryCta": "Book a Consultation",
     "secondaryCta": "Explore Programs",
     "heroImage": "/images/welcome.jpg",
+    "credentials": [
+      "Ph.D. Life Coach",
+      "Certified USA & UK",
+      "Amazon #1 Author"
+    ],
     "stats": [
       { "value": "1,247+", "label": "Personnel Mentored" },
       { "value": "25+", "label": "Years Experience" },

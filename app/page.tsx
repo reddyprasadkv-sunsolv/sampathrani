@@ -119,18 +119,14 @@ export default function HomePage() {
 
               {/* Highlights badge */}
               <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 text-left">
-                <div className="flex items-center space-x-2 text-xs text-[#52443A]">
-                  <CheckCircle2 className="w-4 h-4 text-[#8C7769] shrink-0" />
-                  <span className="font-medium">Ph.D. Life Coach</span>
-                </div>
-                <div className="flex items-center space-x-2 text-xs text-[#52443A]">
-                  <CheckCircle2 className="w-4 h-4 text-[#8C7769] shrink-0" />
-                  <span className="font-medium">Certified USA & UK</span>
-                </div>
-                <div className="flex items-center space-x-2 text-xs text-[#52443A]">
-                  <CheckCircle2 className="w-4 h-4 text-[#8C7769] shrink-0" />
-                  <span className="font-medium">Amazon #1 Author</span>
-                </div>
+                {(hero.credentials || ['Ph.D. Life Coach', 'Certified USA & UK', 'Amazon #1 Author']).map(
+                  (cred: string, cIdx: number) => (
+                    <div key={cIdx} className="flex items-center space-x-2 text-xs text-[#52443A]">
+                      <CheckCircle2 className="w-4 h-4 text-[#8C7769] shrink-0" />
+                      <span className="font-medium">{cred}</span>
+                    </div>
+                  )
+                )}
               </div>
             </div>
 

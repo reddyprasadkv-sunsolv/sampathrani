@@ -265,6 +265,75 @@ export default function AdminPagesEditor() {
               ))}
             </div>
           </div>
+
+          {/* Key Credentials / Trust Highlights (e.g. Ph.D. Life Coach, Certified USA & UK, Amazon #1 Author) */}
+          <div className="pt-4 border-t border-[#EDEDE9] space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h4 className="text-xs uppercase font-bold text-[#382F28] tracking-wider flex items-center space-x-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#8C7769]" />
+                  <span>Key Credentials & Trust Badges (Below CTAs)</span>
+                </h4>
+                <p className="text-[11px] text-[#7E6F64]">
+                  Edit the checklist bullets shown under the hero action buttons (e.g. &quot;Ph.D. Life Coach&quot;, &quot;Certified USA &amp; UK&quot;, &quot;Amazon #1 Author&quot;)
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const current = content.hero?.credentials || ['Ph.D. Life Coach', 'Certified USA & UK', 'Amazon #1 Author'];
+                  setContent({
+                    ...content,
+                    hero: { ...content.hero, credentials: [...current, 'New Credential Badge'] }
+                  });
+                }}
+                className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#F5EBE0] hover:bg-[#D5BDAF] text-[#382F28] border border-[#D5BDAF] flex items-center space-x-1 self-start sm:self-auto transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Badge</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {(content.hero?.credentials || ['Ph.D. Life Coach', 'Certified USA & UK', 'Amazon #1 Author']).map(
+                (cred: string, cIdx: number) => (
+                  <div key={cIdx} className="flex items-center gap-2 p-2.5 bg-[#FAF8F5] rounded-xl border border-[#D5BDAF]/60">
+                    <CheckCircle2 className="w-4 h-4 text-[#8C7769] shrink-0" />
+                    <input
+                      type="text"
+                      value={cred}
+                      onChange={(e) => {
+                        const current = [...(content.hero?.credentials || ['Ph.D. Life Coach', 'Certified USA & UK', 'Amazon #1 Author'])];
+                        current[cIdx] = e.target.value;
+                        setContent({
+                          ...content,
+                          hero: { ...content.hero, credentials: current }
+                        });
+                      }}
+                      className="w-full bg-white border border-[#D5BDAF] rounded-lg p-1.5 text-xs text-[#261E18] focus:outline-none focus:border-[#382F28]"
+                      placeholder="e.g. Ph.D. Life Coach"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (content.hero?.credentials || ['Ph.D. Life Coach', 'Certified USA & UK', 'Amazon #1 Author']).filter(
+                          (_: any, i: number) => i !== cIdx
+                        );
+                        setContent({
+                          ...content,
+                          hero: { ...content.hero, credentials: current }
+                        });
+                      }}
+                      className="p-1 text-red-500 hover:text-red-700 shrink-0 rounded-md hover:bg-red-50"
+                      title="Remove Badge"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
         </div>
       )}
 
