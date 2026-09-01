@@ -297,6 +297,18 @@ export default function BookingModal() {
                 )}
               </button>
 
+              <div className="pt-2 text-center">
+                <a
+                  href="https://wa.me/919848709677?text=Hello%20Dr.%20Sampath%20Rani%2C%20I%20have%20an%20enquiry%20regarding%20consultations%20and%20workshops."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center space-x-1.5 text-xs text-emerald-800 hover:text-emerald-950 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 px-3.5 py-1.5 rounded-full transition-colors font-medium"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>For Immediate Enquiries: WhatsApp +91 98487 09677</span>
+                </a>
+              </div>
+
               <p className="text-[11px] text-center text-[#8E7E73]">
                 🔒 Your privacy is 100% sacred. We never share your personal information.
               </p>

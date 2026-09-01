@@ -8,6 +8,7 @@ import {
   Sparkles,
   ArrowRight,
   Phone,
+  MessageCircle,
   BookOpen,
   Calendar,
   CheckCircle2,
@@ -632,12 +633,13 @@ export default function HomePage() {
               </button>
 
               <a
-                href="https://wa.me/919848709677"
+                href="https://wa.me/919848709677?text=Hello%20Dr.%20Sampath%20Rani%2C%20I%20have%20an%20enquiry%20regarding%20consultations%20and%20workshops."
                 target="_blank"
                 rel="noreferrer"
-                className="w-full sm:w-auto px-9 py-4 rounded-full font-bold text-xs uppercase tracking-wider border border-[#D5BDAF] bg-[#FAF8F5] text-[#382F28] hover:bg-[#F5EBE0] transition-all text-center font-medium"
+                className="w-full sm:w-auto px-9 py-4 rounded-full font-bold text-xs uppercase tracking-wider border border-emerald-600 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all text-center flex items-center justify-center space-x-2"
               >
-                Quick WhatsApp Message
+                <MessageCircle className="w-4 h-4 text-emerald-700" />
+                <span>WhatsApp Enquiry (+91 98487 09677)</span>
               </a>
             </div>
           </div>

@@ -122,16 +122,16 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-semibold text-[#261E18] group-hover:text-[#8C7769] transition-colors">
-                      Phone & Call
+                      Direct Call
                     </div>
                     <div className="text-xs text-[#7E6F64]">
-                      {settings?.phone || '+91 984 870 9677'}
+                      {settings?.phone || '+91 98487 09677'}
                     </div>
                   </div>
                 </a>
 
                 <a
-                  href="https://wa.me/919848709677?text=Hello%20Dr.%20Sampath%20Rani%2C%20I%20would%20like%20to%20inquire%20about%20your%20coaching%20sessions."
+                  href="https://wa.me/919848709677?text=Hello%20Dr.%20Sampath%20Rani%2C%20I%20have%20an%20enquiry%20about%20your%20coaching%20sessions%20and%20workshops."
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-start space-x-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-300 hover:bg-emerald-100/70 transition-colors group shadow-sm"
@@ -141,10 +141,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="text-xs font-bold text-emerald-900 group-hover:text-emerald-950 transition-colors">
-                      WhatsApp Quick Chat
+                      WhatsApp Quick Enquiry
                     </div>
-                    <div className="text-xs text-emerald-800">
-                      +91 984 870 9677 (Instant Response)
+                    <div className="text-xs text-emerald-800 font-medium">
+                      +91 98487 09677 (Instant Response)
                     </div>
                   </div>
                 </a>

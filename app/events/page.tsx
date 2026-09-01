@@ -9,6 +9,7 @@ import {
   Users,
   CheckCircle2,
   Phone,
+  MessageCircle,
   ArrowRight,
   Filter
 } from 'lucide-react';
@@ -116,7 +117,7 @@ export default function EventsPage() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#EDEDE9]">
+              <div className="pt-4 border-t border-[#EDEDE9] space-y-2">
                 <button
                   onClick={() => openBooking(`Workshop Registration: ${evt.title}`)}
                   className="w-full py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[#382F28] hover:bg-[#261E18] text-[#FAF8F5] shadow-md shadow-[#382F28]/15 transition-all flex items-center justify-center space-x-2"
@@ -124,6 +125,16 @@ export default function EventsPage() {
                   <Sparkles className="w-3.5 h-3.5 text-[#D5BDAF]" />
                   <span>Reserve Workshop Seat</span>
                 </button>
+
+                <a
+                  href={`https://wa.me/919848709677?text=${encodeURIComponent(`Hello Dr. Sampath Rani, I have an enquiry regarding ${evt.title}. Could you please share more details?`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full py-2.5 rounded-full font-bold text-xs uppercase tracking-wider border border-emerald-600 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all flex items-center justify-center space-x-1.5"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>WhatsApp Enquiry (+91 98487 09677)</span>
+                </a>
               </div>
             </div>
           ))}
