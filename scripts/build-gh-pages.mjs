@@ -24,6 +24,12 @@ try {
     movedApi = true;
   }
 
+  // Clean stale .next cache
+  const nextDir = path.join(rootDir, '.next');
+  if (fs.existsSync(nextDir)) {
+    fs.rmSync(nextDir, { recursive: true, force: true });
+  }
+
   try {
     // 3. Run Next.js static export
     console.log('⚙️ Building static pages (output: export)...');
