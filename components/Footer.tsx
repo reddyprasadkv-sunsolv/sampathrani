@@ -302,7 +302,14 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#7E6F64] gap-4">
           <div>
             © {new Date().getFullYear()} Dr. Sampath Rani Momula. All Rights Reserved. • Designed & Developed by{' '}
-            <span className="text-[#382F28] font-semibold">SunSolv Technologies</span>
+            <a
+              href="https://www.sunsolv.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#382F28] font-semibold hover:text-[#8C7769] transition-colors underline decoration-[#D5BDAF] underline-offset-2"
+            >
+              SunSolv Technologies
+            </a>
           </div>
 
           <div className="text-[11px] text-[#8C7769]">
