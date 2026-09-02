@@ -22,7 +22,7 @@ export default function WhatsAppConcierge() {
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end">
       {showTooltip && (
         <div className="text-xs text-[#261E18] py-2 px-3.5 rounded-2xl rounded-br-none mb-2 shadow-lg border border-[#D5BDAF] flex items-center space-x-2 bg-[#FAF8F5] animate-bounce">
-          <span className="font-medium">✨ Any Enquiry? WhatsApp +91 98487 09677</span>
+          <span className="font-medium">✨ Any Enquiry? Chat on WhatsApp</span>
           <button
             onClick={() => setShowTooltip(false)}
             className="text-[#7E6F64] hover:text-[#261E18]"
@@ -38,8 +38,8 @@ export default function WhatsAppConcierge() {
         target="_blank"
         rel="noreferrer"
         className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-600 to-emerald-500 text-white shadow-[0_4px_20px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_25px_rgba(16,185,129,0.6)] transition-all duration-300 hover:scale-110 active:scale-95"
-        aria-label="Chat with Dr. Sampath Rani on WhatsApp (+91 98487 09677)"
-        title="WhatsApp Enquiry: +91 98487 09677"
+        aria-label="Chat with Dr. Sampath Rani on WhatsApp"
+        title="WhatsApp Enquiry"
       >
         <span className="absolute -inset-1 rounded-full bg-emerald-500/30 animate-ping opacity-75" />
         <MessageCircle className="w-7 h-7 relative z-10" />

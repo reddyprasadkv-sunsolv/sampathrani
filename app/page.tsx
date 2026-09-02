@@ -639,7 +639,7 @@ export default function HomePage() {
                 className="w-full sm:w-auto px-9 py-4 rounded-full font-bold text-xs uppercase tracking-wider border border-emerald-600 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all text-center flex items-center justify-center space-x-2"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-700" />
-                <span>WhatsApp Enquiry (+91 98487 09677)</span>
+                <span>WhatsApp Enquiry</span>
               </a>
             </div>
           </div>

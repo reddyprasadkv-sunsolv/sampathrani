@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { getImageUrl } from '@/lib/imageUtils';
 import {
-  Phone,
   MessageCircle,
   Mail,
   Clock,
@@ -75,20 +74,13 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <a
-              href="tel:+919848709677"
-              className="flex items-center space-x-2 text-[#261E18] hover:text-[#8C7769] font-medium transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#8C7769]" />
-              <span className="font-semibold">+91 98487 09677</span>
-            </a>
-            <a
               href="https://wa.me/919848709677?text=Hello%20Dr.%20Sampath%20Rani%2C%20I%20have%20an%20enquiry%20regarding%20consultations."
               target="_blank"
               rel="noreferrer"
               className="flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 transition-colors text-xs font-semibold"
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-              <span>WhatsApp Enquiry: +91 98487 09677</span>
+              <span>WhatsApp Enquiry</span>
             </a>
             <a
               href="mailto:sampathrani.lifecoach@gmail.com"
@@ -541,11 +533,11 @@ export default function Navbar() {
                 className="w-full py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center space-x-2 shadow-md"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp Enquiry (+91 98487 09677)</span>
+                <span>WhatsApp Enquiry</span>
               </a>
 
               <div className="text-xs text-center text-[#7E6F64] pt-2">
-                +91 98487 09677 • Hyderabad, India
+                Hyderabad, Telangana, India
               </div>
             </div>
           </div>

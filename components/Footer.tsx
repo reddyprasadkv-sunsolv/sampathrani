@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { getImageUrl } from '@/lib/imageUtils';
 import {
-  Phone,
   MessageCircle,
   Mail,
   MapPin,
@@ -261,18 +260,6 @@ export default function Footer() {
             </div>
 
             <div className="flex items-start space-x-3">
-              <Phone className="w-4 h-4 text-[#8C7769] shrink-0 mt-0.5" />
-              <div>
-                <span className="text-[#261E18] font-semibold">Direct Call</span>
-                <p>
-                  <a href="tel:+919848709677" className="text-[#5A4D43] hover:text-[#261E18]">
-                    +91 98487 09677
-                  </a>
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-3">
               <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <div>
                 <span className="text-[#261E18] font-semibold">WhatsApp Enquiry</span>
@@ -283,7 +270,7 @@ export default function Footer() {
                     rel="noreferrer"
                     className="text-emerald-700 hover:text-emerald-900 font-medium"
                   >
-                    +91 98487 09677
+                    Chat on WhatsApp
                   </a>
                 </p>
               </div>

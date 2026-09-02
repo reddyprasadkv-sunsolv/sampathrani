@@ -133,7 +133,7 @@ export default function EventsPage() {
                   className="w-full py-2.5 rounded-full font-bold text-xs uppercase tracking-wider border border-emerald-600 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all flex items-center justify-center space-x-1.5"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-emerald-700" />
-                  <span>WhatsApp Enquiry (+91 98487 09677)</span>
+                  <span>WhatsApp Enquiry</span>
                 </a>
               </div>
             </div>

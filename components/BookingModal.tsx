@@ -171,7 +171,7 @@ export default function BookingModal() {
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+91 98487 09677"
+                      placeholder="+91 98765 43210"
                       className="w-full bg-white border border-[#D5BDAF] focus:border-[#382F28] rounded-xl py-2.5 pl-10 pr-3 text-xs text-[#261E18] placeholder-[#9E8E83] focus:outline-none"
                     />
                   </div>
@@ -305,7 +305,7 @@ export default function BookingModal() {
                   className="inline-flex items-center space-x-1.5 text-xs text-emerald-800 hover:text-emerald-950 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 px-3.5 py-1.5 rounded-full transition-colors font-medium"
                 >
                   <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>For Immediate Enquiries: WhatsApp +91 98487 09677</span>
+                  <span>For Immediate Enquiries: Chat on WhatsApp</span>
                 </a>
               </div>
 

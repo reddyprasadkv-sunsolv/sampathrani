@@ -114,23 +114,6 @@ export default function ContactPage() {
 
               <div className="space-y-4 pt-2">
                 <a
-                  href={`tel:${settings?.phoneRaw || '+919848709677'}`}
-                  className="flex items-start space-x-4 p-4 rounded-2xl bg-[#FAF8F5] border border-[#D5BDAF]/50 hover:border-[#8C7769] transition-colors group shadow-sm"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#F5EBE0] text-[#382F28] border border-[#D5BDAF] flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-[#261E18] group-hover:text-[#8C7769] transition-colors">
-                      Direct Call
-                    </div>
-                    <div className="text-xs text-[#7E6F64]">
-                      {settings?.phone || '+91 98487 09677'}
-                    </div>
-                  </div>
-                </a>
-
-                <a
                   href="https://wa.me/919848709677?text=Hello%20Dr.%20Sampath%20Rani%2C%20I%20have%20an%20enquiry%20about%20your%20coaching%20sessions%20and%20workshops."
                   target="_blank"
                   rel="noreferrer"
@@ -144,7 +127,7 @@ export default function ContactPage() {
                       WhatsApp Quick Enquiry
                     </div>
                     <div className="text-xs text-emerald-800 font-medium">
-                      +91 98487 09677 (Instant Response)
+                      Instant Response on WhatsApp
                     </div>
                   </div>
                 </a>
@@ -270,7 +253,7 @@ export default function ContactPage() {
                           required
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="+91 98487 09677"
+                          placeholder="+91 98765 43210"
                           className="w-full bg-[#FAF8F5] border border-[#D5BDAF] focus:border-[#382F28] rounded-xl py-2.5 pl-10 pr-3 text-xs text-[#261E18] placeholder-[#9E8E83] focus:outline-none"
                         />
                       </div>
