@@ -100,14 +100,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Media (YouTube video embed or Image) */}
         {blog.youtubeId ? (
-          <div className="rounded-3xl overflow-hidden border border-[#D5BDAF] mb-10 shadow-xl aspect-video bg-black">
-            <iframe
-              src={`https://www.youtube.com/embed/${blog.youtubeId}?rel=0`}
-              title={blog.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full border-0"
-            />
+          <div className="mb-10">
+            <div className="rounded-3xl overflow-hidden border border-[#D5BDAF] shadow-xl aspect-video bg-black">
+              <iframe
+                src={`https://www.youtube.com/embed/${blog.youtubeId}?rel=0`}
+                title={blog.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full border-0"
+              />
+            </div>
+            <div className="mt-3 flex items-center justify-between text-xs text-[#8C7769] px-1">
+              <span className="italic">Soul Video & Reflection</span>
+              <a
+                href={`https://youtube.com/shorts/${blog.youtubeId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 font-bold text-[#382F28] hover:text-[#8C7769] transition-colors"
+              >
+                <span>Watch on YouTube</span>
+                <Play className="w-3.5 h-3.5 fill-current" />
+              </a>
+            </div>
           </div>
         ) : (
           blog.image && (
@@ -125,11 +139,54 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Article Body Content */}
         <article className="max-w-none space-y-6 text-[#4A3E35] text-base sm:text-lg leading-relaxed font-normal">
-          {blog.content.split('\n\n').map((paragraph: string, pIdx: number) => (
-            <p key={pIdx} className="leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
+          {blog.content.split('\n\n').map((paragraph: string, pIdx: number) => {
+            const trimmed = paragraph.trim();
+            if (trimmed.startsWith('#')) {
+              const tags = trimmed.split(/\s+/).filter(Boolean);
+              return (
+                <div key={pIdx} className="flex flex-wrap gap-2 pt-4">
+                  {tags.map((tag: string, tIdx: number) => (
+                    <span
+                      key={tIdx}
+                      className="text-xs font-semibold px-3 py-1.5 rounded-full bg-[#F5EBE0] text-[#4A3E35] border border-[#D5BDAF]/60 shadow-sm"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              );
+            }
+
+            if (trimmed.includes('https://') || trimmed.includes('http://')) {
+              const urlRegex = /(https?:\/\/[^\s]+)/g;
+              const parts = paragraph.split(urlRegex);
+              return (
+                <p key={pIdx} className="leading-relaxed whitespace-pre-line">
+                  {parts.map((part: string, i: number) =>
+                    part.match(urlRegex) ? (
+                      <a
+                        key={i}
+                        href={part}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#8C7769] font-semibold underline underline-offset-4 hover:text-[#382F28] transition-colors break-all"
+                      >
+                        {part}
+                      </a>
+                    ) : (
+                      part
+                    )
+                  )}
+                </p>
+              );
+            }
+
+            return (
+              <p key={pIdx} className="leading-relaxed whitespace-pre-line">
+                {paragraph}
+              </p>
+            );
+          })}
         </article>
 
         {/* Author Bio Box */}
